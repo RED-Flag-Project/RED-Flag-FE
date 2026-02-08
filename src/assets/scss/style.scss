@@ -5,10 +5,10 @@
 @use "setting/common";
 @use "setting/var";
 
-
 // component
 @use "section/common/header";
 @use "section/common/nav";
+@use "section/common/actionButton";
 
 // pages
 @use "section/dangerous/dangerous";
