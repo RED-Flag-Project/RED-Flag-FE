@@ -1,11 +1,18 @@
 import React from 'react';
 import Back from '../../assets/img/ic_back.svg';
+import { useNavigate } from 'react-router-dom';
 
 const NewsDetail = () => {
+    const navigate = useNavigate();
+
+    const handleBack = () => {
+        navigate(-1);
+    };
+
     return (
         <div className='NewsDetail_wrap'>
             <div className="title">
-                <div className="go_back">
+                <div className="go_back" onClick={handleBack}>
                     <img src={Back} alt="뒤로가기" />
                 </div>
                 전체 보안 뉴스

@@ -1,8 +1,11 @@
 import React from 'react';
 import Play from '../../assets/img/ic_play.svg';
 import Youtube from '../../assets/img/ic_youtube.svg';
+import { useNavigate } from 'react-router-dom';
 
 const Security = () => {
+    const navigate = useNavigate();
+
     return (
         <div className="Security_wrap">
             <div className="title">보안 뉴스 & 정보</div>
@@ -10,7 +13,7 @@ const Security = () => {
             <div className="current_news">
                 <div className="subtitle">
                     최신 보안 뉴스
-                    <div className="more">더보기</div>
+                    <div className="more" onClick={() => navigate('/security/news')}>더보기</div>
                 </div>
                 <div className="two_news">
                     <div className="news_card">
@@ -37,7 +40,18 @@ const Security = () => {
                         <img src={Youtube} alt="Youtube" />
                         경찰청 공식 유튜브
                     </div>
-                    <div className="goto_youtube">채널 바로가기</div>
+                    <div
+                        className="goto_youtube"
+                        onClick={() =>
+                            window.open(
+                                'https://www.youtube.com/channel/UC7-PyZbi_QIthI3WFtopzLw',
+                                '_blank',
+                                'noopener,noreferrer'
+                            )
+                        }
+                    >
+                        채널 바로가기
+                    </div>
                 </div>
                 <div className="youtube_videos">
                     <div className="video_card">
