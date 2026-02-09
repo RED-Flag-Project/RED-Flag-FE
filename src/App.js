@@ -16,9 +16,9 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/upload" element={<Upload />} />
         <Route path="/security" element={<Security />} />
-        {/* <Route path="/dangerous" element={<Dangerous />} />
-        <Route path="/identify" element={<Identify />} />
-        <Route path="/report" element={<Report />} /> */}
+        <Route path="/dangerous" element={<Dangerous />} />
+        {/* <Route path="/identify" element={<Identify />} /> */}
+        {/* <Route path="/report" element={<Report />} /> */}
       </Route>
     </Routes>
   )
