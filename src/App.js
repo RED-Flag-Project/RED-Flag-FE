@@ -7,6 +7,7 @@ import Dangerous from "./pages/dangerous/Dangerous";
 import Identify from "./pages/identify/Identify";
 import Report from "./pages/report/Report";
 import Dashboard from "./pages/dashboard/Dashboard";
+import NewsDetail from "pages/security/NewsDetail";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/upload" element={<Upload />} />
         <Route path="/security" element={<Security />} />
+        <Route path="/security/news" element={<NewsDetail />} />
         <Route path="/dangerous" element={<Dangerous />} />
         <Route path="/identify" element={<Identify />} />
         <Route path="/report" element={<Report />} />

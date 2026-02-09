@@ -55,6 +55,7 @@
                 box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.10), 0 1px 2px -1px rgba(0, 0, 0, 0.10);
                 cursor: pointer;
                 gap: 8px;
+                background-color: var(--white);
 
                 .card_top {
                     display: flex;
@@ -165,6 +166,79 @@
                     color: var(--black);
                 }
             }
+        }
+    }
+}
+
+.NewsDetail_wrap {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    padding-bottom: 90px;
+
+    .title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--black);
+        margin-bottom: 16px;
+
+        .go_back {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+
+    .news_card {
+        display: flex;
+        flex-direction: column;
+        padding: 17px;
+        border-radius: 14px;
+        border: 1px solid #F3F4F6;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.10), 0 1px 2px -1px rgba(0, 0, 0, 0.10);
+        cursor: pointer;
+        gap: 8px;
+        background-color: var(--white);
+
+        .card_top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .tag {
+                font-size: 10px;
+                font-weight: 700;
+                color: var(--blue);
+                background-color: var(--lightblue);
+                padding: 5px 10px;
+                border-radius: 5px;
+            }
+
+            .date {
+                font-size: 12px;
+                font-weight: 400;
+                color: #99A1AF;
+            }
+        }
+
+        .card_title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--black);
+        }
+
+        .card_description {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--gray);
         }
     }
 }
