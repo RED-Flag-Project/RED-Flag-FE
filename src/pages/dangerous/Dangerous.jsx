@@ -1,5 +1,5 @@
 import React from 'react';
-import Check from '../../assets/img/ic_check.svg';
+import Check from '../../assets/img/ic_check_danger.svg';
 import Doc from '../../assets/img/ic_doc.svg';
 import Bulb from '../../assets/img/ic_bulb.svg';
 import RightIcon from '../../assets/img/ic_right.svg';
