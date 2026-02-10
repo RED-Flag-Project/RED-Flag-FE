@@ -24,7 +24,12 @@ export default function QuickReportActions() {
         </button>
       </div>
 
-      <div className="cyber-report">
+      <div
+        className="cyber-report"
+        onClick={() =>
+          (window.location.href = "https://ecrm.police.go.kr/minwon/main")
+        }
+      >
         <div className="left">
           <img src={wall} alt="" />
           <div>
