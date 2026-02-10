@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useRef, useLayoutEffect } from "react";
 import Unchecked from "../../assets/img/ic_identify_unchecked.svg";
 import Checked from "../../assets/img/ic_identify_checked.svg";
 import { useAnalysisStore } from "store/analysisStore";
@@ -43,6 +43,12 @@ const CircularProgress = ({ percent = 0, size = 200, stroke = 16 }) => {
 };
 
 const Identify = () => {
+  const pageRef = useRef(null);
+
+  useLayoutEffect(() => {
+    pageRef.current?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, []);
+
   const [percent, setPercent] = useState(0);
   const [done, setDone] = useState([false, false, false]);
 
@@ -86,7 +92,7 @@ const Identify = () => {
   }, [result, navigate]);
 
   return (
-    <div className="Identify_wrap">
+    <div className="Identify_wrap" ref={pageRef}>
       <div className="circle_progressbar">
         <CircularProgress percent={percent} size={200} stroke={16} />
       </div>
