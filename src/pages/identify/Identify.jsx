@@ -1,6 +1,5 @@
 import React from 'react';
-import Unchecked from '../../assets/img/ic_identify_unchecked.svg';
-import Checked from '../../assets/img/ic_identify_checked.svg';
+import Unchecked from '../../assets/img/ic_identify_unchecked.svg';;
 
 const CircularProgress = ({ percent = 92, size = 180, stroke = 16 }) => {
     const radius = (size - stroke) / 2;
