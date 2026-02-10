@@ -1,17 +1,25 @@
-
-import React from 'react'
-import { Navigate, Route, Routes } from 'react-router-dom'
-import RootLayout from './layouts/RootLayout'
-import Upload from './pages/upload/Upload'
-import Security from './pages/security/Security'
-import Dangerous from './pages/dangerous/Dangerous'
-import Identify from './pages/identify/Identify'
-import Report from './pages/report/Report'
-import Dashboard from './pages/dashboard/Dashboard'
-import Pdf from './pages/dangerous/Pdf'
+import React, { useEffect } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
+import RootLayout from "./layouts/RootLayout";
+import Upload from "./pages/upload/Upload";
+import Security from "./pages/security/Security";
+import Dangerous from "./pages/dangerous/Dangerous";
+import Identify from "./pages/identify/Identify";
+import Report from "./pages/report/Report";
+import Dashboard from "./pages/dashboard/Dashboard";
+import Pdf from "./pages/dangerous/Pdf";
 import NewsDetail from "pages/security/NewsDetail";
 
+import useApi from "hook/useApi";
+import { login } from "api/auth";
+
 const App = () => {
+  const { execute } = useApi(login);
+
+  useEffect(() => {
+    execute();
+  }, [execute]);
+
   return (
     <Routes>
       <Route element={<RootLayout />}>
