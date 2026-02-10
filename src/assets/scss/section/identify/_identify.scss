@@ -1,1 +1,101 @@
-.Identify_wrap {}
+.Identify_wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 50px;
+    padding-bottom: 150px;
+
+    .circle_progressbar {
+        margin: 0 auto;
+    }
+
+    .ring {
+        position: relative;
+        display: grid;
+        place-items: center;
+    }
+
+    .ring_svg {
+        transform: rotate(-90deg);
+    }
+
+    .ring_track {
+        fill: none;
+        stroke: #E5E7EB;
+        stroke-linecap: round;
+    }
+
+    .ring_progress {
+        fill: none;
+        stroke: #D92D20;
+        stroke-linecap: round;
+        transition: stroke-dasharray 0.6s ease;
+    }
+
+    .graph_text {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .percent {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--black);
+            line-height: 1;
+
+            span {
+                font-size: 48px;
+                font-weight: 700;
+                color: var(--black);
+                margin-left: 2px;
+                vertical-align: bottom;
+            }
+        }
+
+        .type {
+            font-size: 14px;
+            font-weight: 400;
+            color: #99A1AF;
+            letter-spacing: 1px;
+        }
+    }
+
+    .text {
+        margin-top: 40px;
+        text-align: center;
+        font-size: 20px;
+        font-weight: 400;
+        color: var(--black);
+    }
+
+    .describe {
+        margin-top: 15px;
+        text-align: center;
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--gray);
+    }
+
+    .elements {
+        padding-top: 50px;
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        gap: 16px;
+
+        .element {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            font-size: 16px;
+            font-weight: 400;
+            color: #364153;
+
+            img {
+                width: 28px;
+                height: 28px;
+            }
+        }
+    }
+}

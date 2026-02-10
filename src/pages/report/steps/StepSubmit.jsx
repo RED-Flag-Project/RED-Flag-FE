@@ -11,24 +11,28 @@ export default function StepSubmit({ onNext, onPrev }) {
       title: "경찰청 사이버수사국",
       desc: "ecrm.cyber.go.kr (온라인 신고)",
       type: "link",
+      url: "https://ecrm.police.go.kr/minwon/main",
     },
     {
       id: 2,
       title: "통합대응단 (통신금융사기)",
       desc: "범정부 합동 원스톱 신고 상담 (112)",
       type: "link",
+      url: "https://www.counterscam112.go.kr/",
     },
     {
       id: 3,
       title: "경찰민원콜센터 (유선)",
       desc: "국번없이 182번 (전문 상담)",
       type: "link",
+      url: "https://www.police.go.kr/www/security/report/report01.jsp",
     },
     {
       id: 4,
       title: "가까운 경찰서 방문",
       desc: "준비한 증거물을 지참하여 방문하세요.",
       type: "visit",
+      url: "",
     },
   ];
 
@@ -56,6 +60,7 @@ export default function StepSubmit({ onNext, onPrev }) {
           {reportChannels.map((channel) => (
             <button
               key={channel.id}
+              onClick={() => (window.location.href = `${channel.url}`)}
               className={`channel-item ${channel.type === "visit" ? "visit" : ""}`}
             >
               <div className="info">
