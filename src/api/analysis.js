@@ -7,7 +7,15 @@ export async function upload(image) {
 
   try {
     const res = await client.post("/api/v1/analysis/upload", formData);
-    console.log(res);
+    return res;
+  } catch (error) {
+    throw handleApiError(error);
+  }
+}
+
+export async function analysis(id) {
+  try {
+    const res = await client.get(`/api/v1/analysis/${id}`);
     return res;
   } catch (error) {
     throw handleApiError(error);
