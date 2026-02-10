@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAnalysisStore } from "store/analysisStore";
 
 import UploadHeader from "components/upload/UploadHeader";
 import ImageUploader from "components/upload/ImageUploader";
@@ -11,11 +13,17 @@ import { upload } from "api/analysis";
 
 const Upload = () => {
   const [image, setImage] = useState(null);
-  const { execute, loading } = useApi(upload);
+  const { execute } = useApi(upload);
+  const { start, success } = useAnalysisStore();
+  const navigate = useNavigate();
 
   const handleAnalyze = async () => {
     if (!image) return;
-    execute(image);
+
+    start();
+    execute(image).then(success);
+
+    navigate("/identify");
   };
 
   return (
@@ -30,7 +38,7 @@ const Upload = () => {
 
       <AnalysisGuide />
       <ActionButton
-        label={loading ? "분석 중..." : "분석 실행"}
+        label={"분석 실행"}
         disabled={!image}
         onClick={handleAnalyze}
       />
