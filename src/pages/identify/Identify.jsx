@@ -1,18 +1,18 @@
-import React from 'react';
-import Unchecked from '../../assets/img/ic_identify_unchecked.svg';;
+import React, { useEffect, useMemo, useState } from 'react';
+import Unchecked from '../../assets/img/ic_identify_unchecked.svg';
+import Checked from '../../assets/img/ic_identify_checked.svg';
+import { useNavigate } from 'react-router-dom';
 
-const CircularProgress = ({ percent = 92, size = 180, stroke = 16 }) => {
+const CircularProgress = ({ percent = 0, size = 200, stroke = 16 }) => {
     const radius = (size - stroke) / 2;
     const circumference = 2 * Math.PI * radius;
 
-    // 0~100 clamp
-    const p = Math.max(0, Math.min(100, percent));
+    const p = Math.max(0, Math.min(100, Number(percent) || 0));
     const dash = (circumference * p) / 100;
 
     return (
         <div className="ring" style={{ width: size, height: size }}>
             <svg width={size} height={size} className="ring_svg">
-                {/* 배경 트랙 */}
                 <circle
                     className="ring_track"
                     cx={size / 2}
@@ -20,7 +20,6 @@ const CircularProgress = ({ percent = 92, size = 180, stroke = 16 }) => {
                     r={radius}
                     strokeWidth={stroke}
                 />
-                {/* 진행 바 */}
                 <circle
                     className="ring_progress"
                     cx={size / 2}
@@ -33,7 +32,7 @@ const CircularProgress = ({ percent = 92, size = 180, stroke = 16 }) => {
 
             <div className="graph_text">
                 <div className="percent">
-                    {percent}<span>%</span>
+                    {p}<span>%</span>
                 </div>
                 <div className="type">SCANNING</div>
             </div>
@@ -42,7 +41,50 @@ const CircularProgress = ({ percent = 92, size = 180, stroke = 16 }) => {
 };
 
 const Identify = () => {
-    const percent = 70;
+    const navigate = useNavigate();
+
+    const [percent, setPercent] = useState(0);
+    const [done, setDone] = useState([false, false, false]);
+
+    const steps = useMemo(
+        () => ["OCR 텍스트 추출", "위험 키워드 감지", "데이터베이스 유사도 매칭"],
+        []
+    );
+
+    useEffect(() => {
+        const milestones = [0, 30, 60, 95, 100];
+
+        // 0->30, 30->60, 60->95, 95->100
+        const delays = [400, 600, 800, 500];
+
+        const timers = [];
+        let acc = 0;
+
+        milestones.slice(1).forEach((target, idx) => {
+            acc += delays[idx];
+            timers.push(setTimeout(() => setPercent(target), acc));
+        });
+
+        return () => timers.forEach(clearTimeout);
+    }, []);
+
+    useEffect(() => {
+        setDone([
+            percent >= 30,  // OCR 완료
+            percent >= 60,  // 키워드 완료
+            percent >= 95,  // 유사도 완료
+        ]);
+
+        // 끝나면 결과 페이지로 이동
+        if (percent >= 100) {
+            const t = setTimeout(() => {
+                navigate('/dangerous');
+            }, 2000);
+
+            return () => clearTimeout(t);
+        }
+    }, [percent, navigate]);
+
 
     return (
         <div className="Identify_wrap">
@@ -52,18 +94,12 @@ const Identify = () => {
             <div className="text">메시지를 분석하고 있습니다</div>
             <div className="describe">OCR 텍스트 추출 및 머신러닝 모델이<br />피싱 패턴을 정밀 대조 중입니다.</div>
             <div className="elements">
-                <div className="element">
-                    <img src={Unchecked} alt="Unchecked" />
-                    OCR 텍스트 추출
-                </div>
-                <div className="element">
-                    <img src={Unchecked} alt="Unchecked" />
-                    위험 키워드 감지
-                </div>
-                <div className="element">
-                    <img src={Unchecked} alt="Unchecked" />
-                    데이터베이스 유사도 매칭
-                </div>
+                {steps.map((label, idx) => (
+                    <div className="element" key={label}>
+                        <img src={done[idx] ? Checked : Unchecked} alt={done[idx] ? "Checked" : "Unchecked"} />
+                        {label}
+                    </div>
+                ))}
             </div>
         </div>
     )
