@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useLayoutEffect } from "react";
 import Check from "../../assets/img/ic_check_danger.svg";
 import Doc from "../../assets/img/ic_doc.svg";
 import Bulb from "../../assets/img/ic_bulb.svg";
@@ -62,6 +62,12 @@ const CircularProgress = ({ percent = 92, size = 180, stroke = 16 }) => {
 };
 
 const Dangerous = () => {
+  const pageRef = useRef(null);
+
+  useLayoutEffect(() => {
+    pageRef.current?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, []);
+
   const navigate = useNavigate();
   const { execute, loading, data } = useApi(analysis);
   const { result } = useAnalysisStore();
@@ -94,7 +100,7 @@ const Dangerous = () => {
   ];
 
   return loading ? null : (
-    <div className="Dangerous_wrap">
+    <div className="Dangerous_wrap" ref={pageRef}>
       <div className="circle_graph">
         <CircularProgress percent={percent} size={190} stroke={16} />
       </div>
