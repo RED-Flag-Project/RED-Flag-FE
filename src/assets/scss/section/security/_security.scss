@@ -95,13 +95,13 @@
 
     .youtube {
         margin-top: 24px;
-        padding-left: 20px;
-        padding-right: 20px;
 
         .youtube_top {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            padding-left: 20px;
+            padding-right: 20px;
 
             .subtitle {
                 display: flex;
@@ -128,10 +128,33 @@
         .youtube_videos {
             display: flex;
             margin-top: 16px;
-            gap: 16px;
+
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+
+            cursor: grab;
+            user-select: none;
+
+            scroll-behavior: smooth;
+
+            padding-bottom: 6px;
+
+            &.is-dragging {
+                cursor: grabbing;
+            }
 
             .video_card {
+                flex: 0 0 auto;
                 padding-left: 16px;
+
+                &:first-child {
+                    padding-left: 20px;
+                }
+
+                &:last-child {
+                    padding-right: 20px;
+                }
 
                 .video_thumbnail {
                     position: relative;
@@ -145,6 +168,7 @@
                     .thumb {
                         width: 100%;
                         height: 100%;
+                        pointer-events: none;
                     }
 
                     .play {
@@ -155,6 +179,7 @@
                         left: 50%;
                         transform: translate(-50%, -50%);
                         z-index: 2;
+                        pointer-events: none;
                     }
                 }
 
@@ -201,6 +226,7 @@
         display: flex;
         flex-direction: column;
         padding: 17px;
+        margin-bottom: 16px;
         border-radius: 14px;
         border: 1px solid #F3F4F6;
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.10), 0 1px 2px -1px rgba(0, 0, 0, 0.10);
