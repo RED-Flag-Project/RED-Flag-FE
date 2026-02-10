@@ -1,10 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import wall from "assets/img/ic_red_wall.svg";
 import open from "assets/img/ic_open.svg";
 import check from "assets/img/ic_check.svg";
 import ActionButton from "components/common/ActionButton";
 
-export default function StepSubmit({ onNext, onPrev }) {
+export default function StepSubmit({ onPrev }) {
+  const navigate = useNavigate();
+
   const reportChannels = [
     {
       id: 1,
@@ -60,7 +63,11 @@ export default function StepSubmit({ onNext, onPrev }) {
           {reportChannels.map((channel) => (
             <button
               key={channel.id}
-              onClick={() => (window.location.href = `${channel.url}`)}
+              onClick={() => {
+                if (!channel.url) return;
+                window.open(channel.url, "_blank", "noopener,noreferrer");
+              }}
+              disabled={!channel.url}
               className={`channel-item ${channel.type === "visit" ? "visit" : ""}`}
             >
               <div className="info">
@@ -92,7 +99,12 @@ export default function StepSubmit({ onNext, onPrev }) {
           variant="gray"
           onClick={onPrev}
         />
-        <ActionButton label={"끝내기"} onClick={onNext} />
+        <ActionButton
+          label={"끝내기"}
+          onClick={() => {
+            navigate("/dashboard");
+          }}
+        />
       </div>
     </div>
   );

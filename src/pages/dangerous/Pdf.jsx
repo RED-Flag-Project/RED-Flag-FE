@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useLayoutEffect } from 'react';
 import Check from '../../assets/img/ic_checked.svg';
 import Uncheck from '../../assets/img/ic_unchecked.svg';
 import Doc from '../../assets/img/ic_doc_white.svg';
 import RightBlack from '../../assets/img/ic_right_black.svg';
 
 const Pdf = () => {
+    const pageRef = useRef(null);
+
+    useLayoutEffect(() => {
+        pageRef.current?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    }, []);
+
     const percent = 92;
     const labels = ["긴박함", "비밀유지"];
 
@@ -19,7 +25,7 @@ const Pdf = () => {
     };
 
     return (
-        <div className="Pdf_wrap">
+        <div className="Pdf_wrap" ref={pageRef}>
             <div className="title">증거 리포트 구성</div>
             <div className="subtitle">리포트에 포함할 항목을 선택해 주세요.</div>
             <div className="select">

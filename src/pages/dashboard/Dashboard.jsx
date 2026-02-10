@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useRef, useLayoutEffect } from 'react';
 import Cash from '../../assets/img/ic_cash.svg';
 import Circle20 from '../../assets/img/ic_circle_20.svg';
 import Circle30 from '../../assets/img/ic_circle_30.svg';
@@ -104,6 +104,12 @@ const clamp0to100 = (x) => {
 };
 
 const Dashboard = () => {
+    const pageRef = useRef(null);
+
+    useLayoutEffect(() => {
+        pageRef.current?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    }, []);
+
     const { execute, data, error, loading } = useApi(getTodayStats);
 
     useEffect(() => {
@@ -141,7 +147,7 @@ const Dashboard = () => {
     const femalePercent = clamp0to100(result?.genderDistribution?.female ?? 0);
 
     return (
-        <div className='Dashboard_wrap'>
+        <div className='Dashboard_wrap' ref={pageRef}>
             <div className="title">
                 피싱 범죄 현황
                 <div className="description">최신 금융 사기 피해 현황 및 분석 데이터입니다.</div>

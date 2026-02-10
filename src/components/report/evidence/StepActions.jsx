@@ -12,7 +12,7 @@ export default function StepActions({ onPrev, onNext }) {
 
       <ActionButton
         className="next"
-        label={"정리 완료, 신고 하기 →"}
+        label={"신고 하기 →"}
         variant="primary"
         onClick={onNext}
       />

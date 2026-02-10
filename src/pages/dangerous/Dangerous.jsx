@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useLayoutEffect } from "react";
 import Check from "../../assets/img/ic_check_danger.svg";
 import Doc from "../../assets/img/ic_doc.svg";
 import Bulb from "../../assets/img/ic_bulb.svg";
@@ -62,6 +62,12 @@ const CircularProgress = ({ percent = 92, size = 180, stroke = 16 }) => {
 };
 
 const Dangerous = () => {
+  const pageRef = useRef(null);
+
+  useLayoutEffect(() => {
+    pageRef.current?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, []);
+
   const navigate = useNavigate();
   const { execute, loading, data } = useApi(analysis);
   const { result } = useAnalysisStore();
@@ -77,7 +83,7 @@ const Dangerous = () => {
   const isolation = data?.result?.psychologicalPatterns[2]?.patternScore;
   const falseReward = data?.result?.psychologicalPatterns[3]?.patternScore;
   const scan = data?.result?.rawText;
-  const matchPercent = data?.result?.similarCases[0]?.similarityScore;
+  const matchPercent = data?.result?.similarCases[0]?.similarityScore * 100;
   const firstCase = data?.result?.similarCases[0]?.matchedRank;
   const firstCaseContent = data?.result?.similarCases[0]?.content;
   const secondCase = data?.result?.similarCases[1]?.matchedRank;
@@ -94,7 +100,7 @@ const Dangerous = () => {
   ];
 
   return loading ? null : (
-    <div className="Dangerous_wrap">
+    <div className="Dangerous_wrap" ref={pageRef}>
       <div className="circle_graph">
         <CircularProgress percent={percent} size={190} stroke={16} />
       </div>
