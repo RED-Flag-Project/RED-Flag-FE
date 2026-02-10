@@ -29,7 +29,7 @@ const NewsDetail = () => {
     };
 
     return (
-        <div className='NewsDetail_wrap'>
+        <div className='NewsDetail_wrap' ref={pageRef}>
             <div className="title">
                 <div className="go_back" onClick={handleBack}>
                     <img src={Back} alt="뒤로가기" />

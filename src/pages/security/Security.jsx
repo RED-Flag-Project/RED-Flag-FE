@@ -83,7 +83,7 @@ const Security = () => {
     };
 
     return (
-        <div className="Security_wrap">
+        <div className="Security_wrap" ref={pageRef}>
             <div className="title">보안 뉴스 & 정보</div>
             <div className="description">최신 피싱 사례와 예방 정보를 확인하세요.</div>
             {error && (
