@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Back from '../../assets/img/ic_back.svg';
 import { useNavigate } from 'react-router-dom';
+import useApi from "hook/useApi";
+import { getSecurityNews } from "api/security";
 
 const NewsDetail = () => {
     const navigate = useNavigate();
+    const { execute, data, error, loading } = useApi(getSecurityNews);
+
+    useEffect(() => {
+        execute();
+    }, [execute]);
+
+    const newsList = data?.result?.newsList ?? [];
 
     const handleBack = () => {
         navigate(-1);
+    };
+
+    const handleOpen = (url) => {
+        if (!url) return;
+        window.open(url, "_blank", "noopener,noreferrer");
     };
 
     return (
@@ -17,15 +31,32 @@ const NewsDetail = () => {
                 </div>
                 전체 보안 뉴스
             </div>
-            <div className="news_card">
-                <div className="card_top">
-                    <div className="tag">경찰청 보도자료</div>
-                    <div className="date">2023.10.24</div>
+            {error && (
+                <div style={{ fontSize: 12, color: "#FF6467", marginBottom: 12 }}>
+                    데이터를 불러오지 못했어요: {error?.message}
                 </div>
-                <div className="card_title">신종 보이스피싱 '자녀 납치' 수법 주의보</div>
-                <div className="card_description">최근 AI 목소리 변조 기술을 악용한 자녀 납치 빙자 보이스피싱이 기승을 부리고 있어 각별한 주의가 요구됩니다.</div>
-            </div>
-            {/* 추후 뉴스 10개로 변경 예정 */}
+            )}
+
+            {loading && (
+                <div style={{ fontSize: 12, color: "#99A1AF" }}>
+                    불러오는 중...
+                </div>
+            )}
+
+            {!loading && newsList.map((item) => (
+                <div
+                    key={item.id}
+                    className="news_card"
+                    onClick={() => handleOpen(item.linkUrl)}
+                >
+                    <div className="card_top">
+                        <div className="tag">{item.source}</div>
+                        <div className="date">{item.publishedAt}</div>
+                    </div>
+                    <div className="card_title">{item.title}</div>
+                    <div className="card_description">{item.summary}</div>
+                </div>
+            ))}
         </div>
     )
 }
