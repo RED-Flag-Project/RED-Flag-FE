@@ -1,36 +1,17 @@
-import { useState } from "react";
 import TransferItem from "./TransferItem";
 import card from "assets/img/ic_card.svg";
+import { createTransferItem } from "utils/formFactory";
 
-const createEmptyTransfer = () => ({
-  id: crypto.randomUUID(),
-  datetime: "",
-  receiver: "",
-  bank: "",
-  amount: "",
-});
-
-export default function TransferSection() {
-  const [transfers, setTransfers] = useState([
-    createEmptyTransfer(),
-    createEmptyTransfer(),
-  ]);
-
-  const addItem = () => {
-    setTransfers([...transfers, createEmptyTransfer()]);
-  };
-
-  const removeItem = (id) => {
+export default function TransferSection({ transfers, setTransfers }) {
+  const addItem = () => setTransfers([...transfers, createTransferItem()]);
+  const removeItem = (id) =>
     setTransfers(transfers.filter((item) => item.id !== id));
-  };
-
-  const updateItem = (id, field, value) => {
+  const updateItem = (id, field, value) =>
     setTransfers(
       transfers.map((item) =>
         item.id === id ? { ...item, [field]: value } : item,
       ),
     );
-  };
 
   return (
     <section className="section">
