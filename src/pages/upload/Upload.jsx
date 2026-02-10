@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAnalysisStore } from "store/analysisStore";
 
@@ -12,10 +12,16 @@ import useApi from "hook/useApi";
 import { upload } from "api/analysis";
 
 const Upload = () => {
+  const containerRef = useRef(null);
   const [image, setImage] = useState(null);
   const { execute } = useApi(upload);
   const { start, success } = useAnalysisStore();
   const navigate = useNavigate();
+
+  useLayoutEffect(() => {
+    containerRef.current?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    // 또는: containerRef.current && (containerRef.current.scrollTop = 0);
+  }, []);
 
   const handleAnalyze = async () => {
     if (!image) return;
@@ -27,7 +33,7 @@ const Upload = () => {
   };
 
   return (
-    <div className="Upload-wrap">
+    <div className="Upload-wrap" ref={containerRef}>
       <UploadHeader />
 
       {!image ? (
