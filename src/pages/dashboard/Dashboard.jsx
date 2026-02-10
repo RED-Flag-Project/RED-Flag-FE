@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
 import Cash from '../../assets/img/ic_cash.svg';
 import Circle20 from '../../assets/img/ic_circle_20.svg';
 import Circle30 from '../../assets/img/ic_circle_30.svg';
 import Circle40 from '../../assets/img/ic_circle_40.svg';
 import Circle50 from '../../assets/img/ic_circle_50.svg';
 import Circle60 from '../../assets/img/ic_circle_60.svg';
+import useApi from "hook/useApi";
+import { getTodayStats } from "api/dashboard";
 
 const SegmentedDonut = ({
     values = [15, 20, 25, 30, 10],
@@ -69,15 +71,74 @@ const SegmentedDonut = ({
     );
 };
 
+const formatKRWShort = (amount) => {
+    const n = Number(amount);
+    if (!Number.isFinite(n)) return "-";
+
+    const sign = n < 0 ? "-" : "";
+    let v = Math.abs(n);
+
+    const units = [
+        { value: 1e12, label: "조" },
+        { value: 1e8, label: "억" },
+        { value: 1e4, label: "만" },
+    ];
+
+    let out = "";
+    for (const u of units) {
+        if (v >= u.value) {
+            const q = Math.floor(v / u.value);
+            v = v % u.value;
+            out += `${q}${u.label} `;
+        }
+    }
+
+    if (!out) out = `${Math.floor(Math.abs(n)).toLocaleString()}원`;
+    return `${sign}${out.trim()}`;
+};
+
+const clamp0to100 = (x) => {
+    const v = Number(x);
+    if (!Number.isFinite(v)) return 0;
+    return Math.max(0, Math.min(100, v));
+};
+
 const Dashboard = () => {
-    const todayCount = 100;
-    const yearTotal = "1조 3,000억";
-    const increaseRate = 56;
-    const totalCaseCount = 18676;
-    const caseIncreaseRate = 15.6;
-    const circlepertentage = [15, 20, 25, 30, 10];
-    const malePercent = 46;
-    const femalePercent = 54;
+    const { execute, data, error, loading } = useApi(getTodayStats);
+
+    useEffect(() => {
+        execute();
+    }, [execute]);
+
+    const result = data?.result;
+
+    const todayCount = result?.todayDetection?.count ?? 0;
+
+    const totalDamageAmount = result?.totalDamageStats?.totalDamageAmount ?? 0;
+    const yearTotal = formatKRWShort(totalDamageAmount);
+    const increaseRate = result?.totalDamageStats?.yearOverYearChangeRate ?? 0;
+
+    const totalCaseCount = result?.totalDamageStats?.totalIncidentCount ?? 0;
+    const caseIncreaseRate = result?.totalDamageStats?.incidentChangeRate ?? 0;
+
+    const round1 = (x) => Math.round(Number(x) * 10) / 10;
+    const circlepertentage = useMemo(() => {
+        const age = result?.ageDistribution;
+
+        const under20 = round1(clamp0to100(age?.under20 ?? 0));
+        const thirties = round1(clamp0to100(age?.thirties ?? 0));
+        const forties = round1(clamp0to100(age?.forties ?? 0));
+        const fifties = round1(clamp0to100(age?.fifties ?? 0));
+        const sixties = round1(clamp0to100(age?.sixties ?? 0));
+        const over70 = round1(clamp0to100(age?.over70 ?? 0));
+
+        const sixtyPlus = round1(clamp0to100(sixties + over70));
+
+        return [under20, thirties, forties, fifties, sixtyPlus];
+    }, [result]);
+
+    const malePercent = clamp0to100(result?.genderDistribution?.male ?? 0);
+    const femalePercent = clamp0to100(result?.genderDistribution?.female ?? 0);
 
     return (
         <div className='Dashboard_wrap'>
@@ -85,9 +146,14 @@ const Dashboard = () => {
                 피싱 범죄 현황
                 <div className="description">최신 금융 사기 피해 현황 및 분석 데이터입니다.</div>
             </div>
+            {error && (
+                <div style={{ fontSize: 12, color: "#FF6467" }}>
+                    데이터를 불러오지 못했어요: {error?.message}
+                </div>
+            )}
             <div className="today">
                 <div className="subtitle">오늘 탐지된 피싱, 스캠 건수</div>
-                <div className="today_count">총 {todayCount}건</div>
+                <div className="today_count">총 {loading ? "..." : todayCount}건</div>
             </div>
             <div className="year_total">
                 <div className="subtitle">
@@ -95,17 +161,17 @@ const Dashboard = () => {
                     2025년 총 피해 규모
                 </div>
                 <div className="cumulative">누적 피해액</div>
-                <div className="year_total_num">{yearTotal} 원</div>
-                <div className="comparison">▲ 전년 대비 {increaseRate}% 증가</div>
+                <div className="year_total_num">{loading ? "..." : `${yearTotal} 원`}</div>
+                <div className="comparison">▲ 전년 대비 {loading ? "..." : increaseRate}% 증가</div>
                 <div className="divider"></div>
                 <div className="cases">
                     <div className="total_case">
                         <div className="subtitle">총 발생 건수</div>
-                        <div className="case_num">{totalCaseCount}건</div>
+                        <div className="case_num">{loading ? "..." : `${totalCaseCount}건`}</div>
                     </div>
                     <div className="comparison_lastyear">
                         <div className="subtitle">전년 대비 발생 건수</div>
-                        <div className="case_increase">{caseIncreaseRate}% 증가</div>
+                        <div className="case_increase">{loading ? "..." : `${caseIncreaseRate}% 증가`}</div>
                     </div>
                 </div>
             </div>
