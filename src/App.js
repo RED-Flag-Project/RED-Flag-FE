@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import RootLayout from './layouts/RootLayout'
@@ -8,7 +9,7 @@ import Identify from './pages/identify/Identify'
 import Report from './pages/report/Report'
 import Dashboard from './pages/dashboard/Dashboard'
 import Pdf from './pages/dangerous/Pdf'
-
+import NewsDetail from "pages/security/NewsDetail";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/upload" element={<Upload />} />
         <Route path="/security" element={<Security />} />
+        <Route path="/security/news" element={<NewsDetail />} />
         <Route path="/dangerous" element={<Dangerous />} />
         <Route path="/dangerous/pdf" element={<Pdf />} />
         <Route path="/identify" element={<Identify />} />
