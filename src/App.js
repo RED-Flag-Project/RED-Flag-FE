@@ -9,6 +9,7 @@ import Report from './pages/report/Report'
 import Dashboard from './pages/dashboard/Dashboard'
 import Pdf from './pages/dangerous/Pdf'
 
+
 const App = () => {
   return (
     <Routes>
@@ -19,11 +20,11 @@ const App = () => {
         <Route path="/security" element={<Security />} />
         <Route path="/dangerous" element={<Dangerous />} />
         <Route path="/dangerous/pdf" element={<Pdf />} />
-        {/* <Route path="/identify" element={<Identify />} /> */}
-        {/* <Route path="/report" element={<Report />} /> */}
+        <Route path="/identify" element={<Identify />} />
+        <Route path="/report" element={<Report />} />
       </Route>
     </Routes>
-  )
-}
+  );
+};
 
-export default App
+export default App;
