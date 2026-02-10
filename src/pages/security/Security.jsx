@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import Play from '../../assets/img/ic_play.svg';
 import Youtube from '../../assets/img/ic_youtube.svg';
 import { useNavigate } from 'react-router-dom';
