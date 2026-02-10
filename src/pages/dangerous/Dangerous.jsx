@@ -46,7 +46,6 @@ const CircularProgress = ({ percent = 92, size = 180, stroke = 16 }) => {
 
 const Dangerous = () => {
     const percent = 92;
-    const type = "HIGH RISK";
     const urgency = 85;
     const secret = 45;
     const isolation = 92;
