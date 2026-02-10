@@ -1,11 +1,35 @@
-import React from 'react'
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import UploadHeader from "components/upload/UploadHeader";
+import ImageUploader from "components/upload/ImageUploader";
+import ImagePreview from "components/upload/ImagePreview";
+import AnalysisGuide from "components/upload/AnalysisGuide";
+import ActionButton from "components/common/ActionButton";
 
 const Upload = () => {
-    return (
-        <div className="Upload_wrap">
-            피싱분석 첫 번째 페이지인 이미지 분석 페이지입니다.
-        </div>
-    )
-}
+  const [image, setImage] = useState(null);
+  const navigate = useNavigate();
 
-export default Upload
+  return (
+    <div className="Upload-wrap">
+      <UploadHeader />
+
+      {!image ? (
+        <ImageUploader onUpload={setImage} />
+      ) : (
+        <ImagePreview image={image} onRemove={() => setImage(null)} />
+      )}
+
+      <AnalysisGuide />
+      <ActionButton
+        label={"분석 실행"}
+        disabled={!image}
+        onClick={() => {
+          navigate("/identify");
+        }}
+      />
+    </div>
+  );
+};
+
+export default Upload;
