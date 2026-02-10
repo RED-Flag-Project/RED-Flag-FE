@@ -1,0 +1,244 @@
+.Security_wrap {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    padding-bottom: 150px;
+
+    .title {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--black);
+        padding-left: 20px;
+    }
+
+    .description {
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--gray);
+        padding-left: 20px;
+    }
+
+    .current_news {
+        margin-top: 18px;
+        padding-right: 20px;
+
+        .subtitle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--black);
+            padding-left: 20px;
+
+            .more {
+                font-size: 14px;
+                font-weight: 400;
+                color: #99A1AF;
+                cursor: pointer;
+            }
+        }
+
+        .two_news {
+            display: flex;
+            flex-direction: column;
+            margin-top: 16px;
+            gap: 16px;
+            padding-left: 20px;
+
+            .news_card {
+                display: flex;
+                flex-direction: column;
+                padding: 17px;
+                border-radius: 14px;
+                border: 1px solid #F3F4F6;
+                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.10), 0 1px 2px -1px rgba(0, 0, 0, 0.10);
+                cursor: pointer;
+                gap: 8px;
+                background-color: var(--white);
+
+                .card_top {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    .tag {
+                        font-size: 10px;
+                        font-weight: 700;
+                        color: var(--blue);
+                        background-color: var(--lightblue);
+                        padding: 5px 10px;
+                        border-radius: 5px;
+                    }
+
+                    .date {
+                        font-size: 12px;
+                        font-weight: 400;
+                        color: #99A1AF;
+                    }
+                }
+
+                .card_title {
+                    font-size: 16px;
+                    font-weight: 700;
+                    color: var(--black);
+                }
+
+                .card_description {
+                    font-size: 14px;
+                    font-weight: 400;
+                    color: var(--gray);
+                }
+            }
+        }
+    }
+
+    .youtube {
+        margin-top: 24px;
+        padding-left: 20px;
+        padding-right: 20px;
+
+        .youtube_top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .subtitle {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                font-size: 18px;
+                font-weight: 700;
+                color: var(--black);
+
+                img {
+                    width: 24px;
+                    height: 24px;
+                }
+            }
+
+            .goto_youtube {
+                font-size: 14px;
+                font-weight: 400;
+                color: #99A1AF;
+                cursor: pointer;
+            }
+        }
+
+        .youtube_videos {
+            display: flex;
+            margin-top: 16px;
+            gap: 16px;
+
+            .video_card {
+                padding-left: 16px;
+
+                .video_thumbnail {
+                    position: relative;
+                    width: 240px;
+                    height: 135px;
+                    border-radius: 14px;
+                    border: none;
+                    overflow: hidden;
+                    cursor: pointer;
+
+                    .thumb {
+                        width: 100%;
+                        height: 100%;
+                    }
+
+                    .play {
+                        width: 40px;
+                        height: 40px;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        z-index: 2;
+                    }
+                }
+
+                .video_title {
+                    width: 240px;
+                    margin-top: 12px;
+                    font-size: 14px;
+                    font-weight: 400;
+                    color: var(--black);
+                }
+            }
+        }
+    }
+}
+
+.NewsDetail_wrap {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    padding-bottom: 90px;
+
+    .title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--black);
+        margin-bottom: 16px;
+
+        .go_back {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+
+    .news_card {
+        display: flex;
+        flex-direction: column;
+        padding: 17px;
+        border-radius: 14px;
+        border: 1px solid #F3F4F6;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.10), 0 1px 2px -1px rgba(0, 0, 0, 0.10);
+        cursor: pointer;
+        gap: 8px;
+        background-color: var(--white);
+
+        .card_top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .tag {
+                font-size: 10px;
+                font-weight: 700;
+                color: var(--blue);
+                background-color: var(--lightblue);
+                padding: 5px 10px;
+                border-radius: 5px;
+            }
+
+            .date {
+                font-size: 12px;
+                font-weight: 400;
+                color: #99A1AF;
+            }
+        }
+
+        .card_title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--black);
+        }
+
+        .card_description {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--gray);
+        }
+    }
+}

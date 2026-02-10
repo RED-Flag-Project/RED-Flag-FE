@@ -1,0 +1,278 @@
+.Dashboard_wrap {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 24px;
+    padding-bottom: 100px;
+
+    .title {
+        display: flex;
+        flex-direction: column;
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--black);
+
+        .description {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--gray);
+        }
+    }
+
+    .today {
+        display: flex;
+        flex-direction: column;
+        background-color: #FFE2E2;
+        border: 1px solid #F3F4F6;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.10), 0 1px 2px -1px rgba(0, 0, 0, 0.10);
+        border-radius: 14px;
+        padding: 21px;
+        gap: 33px;
+
+        .subtitle {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--black);
+        }
+
+        .today_count {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--main);
+        }
+    }
+
+    .year_total {
+        display: flex;
+        flex-direction: column;
+        background-color: var(--white);
+        border: 1px solid #F3F4F6;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.10), 0 1px 2px -1px rgba(0, 0, 0, 0.10);
+        border-radius: 14px;
+        padding: 21px;
+
+        .subtitle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--black);
+
+            img {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        .cumulative {
+            margin-top: 16px;
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--gray);
+        }
+
+        .year_total_num {
+            margin-top: 1px;
+            font-size: 30px;
+            font-weight: 700;
+            color: var(--main);
+        }
+
+        .comparison {
+            margin-top: 7px;
+            font-size: 12px;
+            font-weight: 400;
+            color: #FF6467;
+        }
+
+        .divider {
+            width: 100%;
+            height: 1px;
+            margin: 16px 0;
+            border-top: 1px solid #F3F4F6;
+        }
+
+        .cases {
+            display: flex;
+            gap: 16px;
+
+            .total_case {
+                display: flex;
+                flex: 1;
+                flex-direction: column;
+
+                .subtitle {
+                    font-size: 12px;
+                    font-weight: 400;
+                    color: var(--gray);
+                }
+
+                .case_num {
+                    margin-top: 4px;
+                    font-size: 18px;
+                    font-weight: 700;
+                    color: var(--black);
+                }
+            }
+
+            .comparison_lastyear {
+                display: flex;
+                flex: 1;
+                flex-direction: column;
+
+                .subtitle {
+                    font-size: 12px;
+                    font-weight: 400;
+                    color: var(--gray);
+                }
+
+                .case_increase {
+                    margin-top: 4px;
+                    font-size: 18px;
+                    font-weight: 700;
+                    color: var(--black);
+                }
+            }
+        }
+    }
+
+    .ageNgender {
+        display: flex;
+        flex-direction: column;
+        background-color: var(--white);
+        border: 1px solid #F3F4F6;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.10), 0 1px 2px -1px rgba(0, 0, 0, 0.10);
+        border-radius: 14px;
+        padding: 21px;
+
+        .age {
+            .subtitle {
+                font-size: 16px;
+                font-weight: 700;
+                color: var(--black);
+            }
+
+            .chart {
+                display: flex;
+                align-items: center;
+                margin-top: 18px;
+                gap: 40px;
+
+                .circle_graph {
+                    flex: 1;
+                    width: 140px;
+                    height: 140px;
+                    justify-content: center;
+                    align-items: center;
+                    background: transparent;
+                }
+
+                .donut {
+                    position: relative;
+                    display: grid;
+                    place-items: center;
+                }
+
+                .donut_svg {
+                    display: block;
+                }
+
+                .donut_center {
+                    position: absolute;
+                    font-size: 12px;
+                    font-weight: 700;
+                    color: #99A1AF;
+                    line-height: 1;
+                }
+
+                .ages {
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+
+                    .age_groups {
+                        display: flex;
+                        justify-content: space-between;
+
+                        .age_group {
+                            display: flex;
+                            align-items: center;
+                            gap: 8px;
+                            font-size: 12px;
+                            font-weight: 400;
+                            color: #4A5565;
+
+                            img {
+                                width: 8px;
+                                height: 8px;
+                            }
+                        }
+
+                        .age_percentage {
+                            font-size: 12px;
+                            font-weight: 700;
+                            color: var(--black);
+                        }
+                    }
+                }
+            }
+        }
+
+        .divider {
+            width: 100%;
+            height: 1px;
+            margin: 16px 0;
+            border-top: 1px solid #F3F4F6;
+        }
+
+        .gender {
+            .subtitle {
+                font-size: 16px;
+                font-weight: 700;
+                color: var(--black);
+            }
+
+            .gender_percentage {
+                margin-top: 12px;
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .gender_top {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .male_text,
+                .female_text {
+                    font-size: 12px;
+                    font-weight: 400;
+                    color: var(--gray);
+                }
+            }
+
+            .gender_bar {
+                width: 100%;
+                height: 12px;
+                border-radius: 999px;
+                overflow: hidden;
+                display: flex;
+                background: #EEF2F7;
+            }
+
+            .gender_fill {
+                height: 100%;
+            }
+
+            .gender_fill--male {
+                background: #2B7FFF;
+            }
+
+            .gender_fill--female {
+                background: #FF6467;
+            }
+        }
+    }
+}

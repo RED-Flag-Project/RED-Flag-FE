@@ -1,0 +1,31 @@
+.primary-action {
+  color: #6a7282;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 16px;
+  border-radius: 14px;
+  border: none;
+  background: #e0e0e0;
+  color: #999;
+
+  &.primary {
+    background: var(--main);
+    color: var(--white);
+  }
+
+  &.gray {
+    background: #f3f4f6;
+    color: var(--gray);
+  }
+
+  &.disabled {
+    background: var(--lightgray);
+    color: var(--gray);
+  }
+}
