@@ -58,7 +58,7 @@ const Identify = () => {
     const milestones = [0, 30, 60, 95, 100];
 
     // 0->30, 30->60, 60->95, 95->100
-    const delays = [400, 600, 800, 500];
+    const delays = [1400, 2700, 4000, 2500];
 
     const timers = [];
     let acc = 0;
