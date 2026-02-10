@@ -3,6 +3,7 @@ import Check from '../../assets/img/ic_checked.svg';
 import Uncheck from '../../assets/img/ic_unchecked.svg';
 import Doc from '../../assets/img/ic_doc_white.svg';
 import RightBlack from '../../assets/img/ic_right_black.svg';
+import { useNavigate } from 'react-router-dom';
 
 const Pdf = () => {
     const pageRef = useRef(null);
@@ -10,6 +11,8 @@ const Pdf = () => {
     useLayoutEffect(() => {
         pageRef.current?.scrollTo({ top: 0, left: 0, behavior: "auto" });
     }, []);
+
+    const navigate = useNavigate();
 
     const percent = 92;
     const labels = ["긴박함", "비밀유지"];
@@ -84,7 +87,7 @@ const Pdf = () => {
                 <div className="pdf_subtitle">선택하신 항목을 바탕으로 수사 기관 제출용 전문 보고서를 생성합니다.</div>
                 <div className="save_pdf">PDF 리포트 저장하기</div>
             </div>
-            <div className="next">
+            <div className="next" onClick={() => navigate('/report')}>
                 다음: 안전 조치 가이드
                 <img src={RightBlack} alt="다음 아이콘" />
             </div>

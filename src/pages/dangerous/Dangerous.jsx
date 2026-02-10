@@ -186,7 +186,7 @@ const Dangerous = () => {
           </div>
         </div>
       </div>
-      <div className="create_report" onClick={() => navigate("/report")}>
+      <div className="create_report" onClick={() => navigate("/dangerous/pdf")}>
         리포트 생성하기
         <img src={RightIcon} alt="right icon" />
       </div>
