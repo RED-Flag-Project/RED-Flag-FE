@@ -1,32 +1,22 @@
-import { useState } from "react";
 import TimelineItem from "./TimelineItem";
 import clock from "assets/img/ic_clock.svg";
+import { createTimelineItem } from "utils/formFactory";
 
-export default function TimelineSection() {
-  const [items, setItems] = useState([
-    { time: "2026-02-01T14:30", text: "" },
-    { time: "2026-02-01T14:00", text: "" },
-  ]);
-
+export default function TimelineSection({ items, setItems }) {
   const addItem = () => {
-    const now = new Date().toISOString().slice(0, 16);
-    setItems([...items, { time: now, text: "" }]);
+    setItems([...items, createTimelineItem()]);
   };
 
-  const updateText = (idx, value) => {
-    const next = [...items];
-    next[idx].text = value;
-    setItems(next);
+  const removeItem = (id) => {
+    setItems(items.filter((item) => item.id !== id));
   };
 
-  const updateTime = (idx, value) => {
-    const next = [...items];
-    next[idx].time = value;
-    setItems(next);
-  };
-
-  const deleteItem = (idx) => {
-    setItems(items.filter((_, i) => i !== idx));
+  const updateItem = (id, field, value) => {
+    setItems(
+      items.map((item) =>
+        item.id === id ? { ...item, [field]: value } : item,
+      ),
+    );
   };
 
   return (
@@ -41,14 +31,14 @@ export default function TimelineSection() {
         </button>
       </div>
 
-      {items.map((item, idx) => (
+      {items.map((item) => (
         <TimelineItem
-          key={idx}
+          key={item.id}
           time={item.time}
           value={item.text}
-          onChange={(e) => updateText(idx, e.target.value)}
-          onTimeChange={(e) => updateTime(idx, e.target.value)}
-          onDelete={() => deleteItem(idx)}
+          onChange={(e) => updateItem(item.id, "text", e.target.value)}
+          onTimeChange={(e) => updateItem(item.id, "time", e.target.value)}
+          onDelete={() => removeItem(item.id)}
         />
       ))}
     </section>
