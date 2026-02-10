@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import Play from '../../assets/img/ic_play.svg';
 import Youtube from '../../assets/img/ic_youtube.svg';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +8,12 @@ import { getSecurityInfo } from "api/security";
 const Security = () => {
     const navigate = useNavigate();
     const { execute, data, error, loading } = useApi(getSecurityInfo);
+
+    const pageRef = useRef(null);
+    useLayoutEffect(() => {
+        pageRef.current?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+        // 또는: if (pageRef.current) pageRef.current.scrollTop = 0;
+    }, []);
 
     // 유튜브 가로 스크롤 드래그용
     const scrollerRef = useRef(null);

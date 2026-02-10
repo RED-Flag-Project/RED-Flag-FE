@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useLayoutEffect, useRef } from 'react';
 import Back from '../../assets/img/ic_back.svg';
 import { useNavigate } from 'react-router-dom';
 import useApi from "hook/useApi";
@@ -7,6 +7,11 @@ import { getSecurityNews } from "api/security";
 const NewsDetail = () => {
     const navigate = useNavigate();
     const { execute, data, error, loading } = useApi(getSecurityNews);
+
+    const pageRef = useRef(null);
+    useLayoutEffect(() => {
+        pageRef.current?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    }, []);
 
     useEffect(() => {
         execute();
