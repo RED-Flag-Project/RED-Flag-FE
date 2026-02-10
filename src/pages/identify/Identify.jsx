@@ -92,7 +92,7 @@ const Identify = () => {
   }, [result, navigate]);
 
   return (
-    <div className="Identify_wrap">
+    <div className="Identify_wrap" ref={pageRef}>
       <div className="circle_progressbar">
         <CircularProgress percent={percent} size={200} stroke={16} />
       </div>
