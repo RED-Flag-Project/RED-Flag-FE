@@ -77,7 +77,7 @@ const Dangerous = () => {
   const isolation = data?.result?.psychologicalPatterns[2]?.patternScore;
   const falseReward = data?.result?.psychologicalPatterns[3]?.patternScore;
   const scan = data?.result?.rawText;
-  const matchPercent = data?.result?.similarCases[0]?.similarityScore;
+  const matchPercent = data?.result?.similarCases[0]?.similarityScore * 100;
   const firstCase = data?.result?.similarCases[0]?.matchedRank;
   const firstCaseContent = data?.result?.similarCases[0]?.content;
   const secondCase = data?.result?.similarCases[1]?.matchedRank;
